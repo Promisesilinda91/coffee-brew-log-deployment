@@ -3,34 +3,37 @@ import cors from "cors";
 
 const app = express();
 
-// FIX 1: Allow your frontend to connect
+// Allow your frontend
 app.use(cors({
   origin: [
     "http://localhost:5173",
     "https://coffee-frontend-indol.vercel.app"
-  ]
+  ],
+  credentials: true
 }));
 
 app.use(express.json());
 
-// FIX 2: Add storage + API routes
+// In-memory storage
 let brews = [];
 
-// Load brews
+// GET all brews
 app.get("/brews", (req, res) => {
+  console.log("GET /brews called");
   res.json(brews);
 });
 
-// Save brew
+// POST new brew
 app.post("/brews", (req, res) => {
+  console.log("POST /brews called", req.body);
   const newBrew = { id: Date.now(), ...req.body };
   brews.push(newBrew);
   res.status(201).json(newBrew);
 });
 
-// Test route
+// Health check
 app.get("/", (req, res) => {
-  res.json({ message: "Backend is alive! No DB" });
+  res.json({ message: "Backend is alive!" });
 });
 
 const PORT = process.env.PORT || 3000;
