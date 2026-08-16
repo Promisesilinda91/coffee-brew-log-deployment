@@ -1,7 +1,7 @@
 {
   "name": "backend",
   "version": "1.0.0",
-  "description": "Express API for the Coffee Brew Log assessment",
+  "description": "Express API for the Coffee Br",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
